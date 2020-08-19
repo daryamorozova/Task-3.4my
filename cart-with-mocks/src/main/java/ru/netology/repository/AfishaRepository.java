@@ -2,8 +2,12 @@ package ru.netology.repository;
 
 import ru.netology.domain.PurchaseItem;
 
-public class CartRepository {
+public class AfishaRepository {
   private PurchaseItem[] items = new PurchaseItem[0];
+
+  public PurchaseItem[] findAll() {
+    return items;
+  }
 
   public void save(PurchaseItem item) {
     int length = items.length + 1;
@@ -12,10 +16,6 @@ public class CartRepository {
     int lastIndex = tmp.length - 1;
     tmp[lastIndex] = item;
     items = tmp;
-  }
-
-  public PurchaseItem[] findAll() {
-    return items;
   }
 
   public void removeById(int id) {
@@ -29,5 +29,20 @@ public class CartRepository {
       }
     }
     items = tmp;
+  }
+
+  public PurchaseItem findById(int id) {
+    for (PurchaseItem item : items) {
+      if (item.getId() == id) {
+        return item;
+      }
+    }
+    return null;
+  }
+
+  public PurchaseItem[] removeAll() {
+    PurchaseItem[] items = new PurchaseItem[0];
+
+    return items;
   }
 }
