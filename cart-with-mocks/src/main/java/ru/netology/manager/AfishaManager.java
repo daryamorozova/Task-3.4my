@@ -1,12 +1,13 @@
 package ru.netology.manager;
 
 import ru.netology.domain.PurchaseItem;
-import ru.netology.repository.CartRepository;
+import ru.netology.repository.AfishaRepository;
 
-public class CartManager {
-  private CartRepository repository;
+public class AfishaManager {
+  private AfishaRepository repository;
+  private int afishaLength = 10;
 
-  public CartManager(CartRepository repository) {
+  public AfishaManager(AfishaRepository repository) {
     this.repository = repository;
   }
 
@@ -16,7 +17,8 @@ public class CartManager {
 
   public PurchaseItem[] getAll() {
     PurchaseItem[] items = repository.findAll();
-    PurchaseItem[] result = new PurchaseItem[items.length];
+    int resultLength = Math.min(afishaLength, items.length);
+    PurchaseItem[] result = new PurchaseItem[resultLength];
     for (int i = 0; i < result.length; i++) {
       int index = items.length - i - 1;
       result[i] = items[index];
@@ -24,7 +26,4 @@ public class CartManager {
     return result;
   }
 
-  public void removeById(int id) {
-    repository.removeById(id);
-  }
 }
